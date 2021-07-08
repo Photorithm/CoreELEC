@@ -144,6 +144,13 @@ if [ "${SUBDEVICE}" == "LePotato" -o "${SUBDEVICE}" == "LaFrite" ]; then
   fi
 fi
 
+if [ "${SUBDEVICE}" == "Radxa_Zero" ]; then
+  if [ -f $SYSTEM_ROOT/usr/share/bootloader/radxa-boot-logo-1080.bmp.gz ]; then
+    echo "Updating boot logos..."
+    cp -p $SYSTEM_ROOT/usr/share/bootloader/radxa-boot-logo-1080.bmp.gz $BOOT_ROOT/boot-logo-1080.bmp.gz
+  fi
+fi
+
 if [ -f $SYSTEM_ROOT/usr/share/bootloader/${SUBDEVICE}_u-boot -a ! -e /dev/env ]; then
   echo "Updating u-boot on: $BOOT_DISK..."
   dd if=$SYSTEM_ROOT/usr/share/bootloader/${SUBDEVICE}_u-boot of=$BOOT_DISK conv=fsync bs=1 count=112 status=none
